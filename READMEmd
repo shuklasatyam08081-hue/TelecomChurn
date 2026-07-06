@@ -1,0 +1,55 @@
+# 📞 Telecom Customer Churn Prediction Dashboard
+
+An interactive Streamlit app for exploring telecom customer data, comparing multiple ML models, tuning a Decision Tree, and predicting customer churn in real time.
+
+## 🚀 Features
+
+- **Data Overview** — dataset audit, missing values, duplicates
+- **Business KPIs** — churn rate, average revenue per customer, estimated annual CLV
+- **Exploratory Data Analysis** — usage distributions, churn by state, churn vs. customer service calls, correlation heatmap
+- **Feature Engineering** — outlier clipping, derived features (`Total_Usage`, `Service_Stress`), categorical encoding, correlation-based feature pruning
+- **Model Training & Comparison** — Logistic Regression, Decision Tree, Random Forest, KNN, and Naive Bayes compared on Accuracy, Precision, Recall, F1, and ROC-AUC, with confusion matrices, ROC curves, and feature importance
+- **Hyperparameter Tuning** — GridSearchCV tuning for the Decision Tree, with baseline vs. tuned comparison
+- **Live Prediction** — pick a customer from the test set and predict churn probability instantly
+- **Export** — download test-set predictions as CSV
+
+## 🛠️ Tech Stack
+
+- Python, Streamlit
+- pandas, numpy
+- scikit-learn
+- matplotlib, seaborn
+- joblib (model persistence)
+
+## 📦 Setup
+
+```bash
+# 1. Create and activate a virtual environment
+python -m venv .venv
+.venv\Scripts\Activate.ps1      # Windows PowerShell
+source .venv/bin/activate       # Mac/Linux
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the app
+streamlit run app_churn.py
+```
+
+## 📂 Dataset
+
+Upload a CSV with the standard telecom churn schema (State, Account length, International plan, Voice mail plan, usage/charge columns, Customer service calls, Churn, etc.) via the sidebar. A sample `dataset.csv` is included for quick testing — note it's synthetic, so results are for demo purposes only.
+
+##  How It Works
+
+1. Upload your dataset from the sidebar
+2. Review KPIs and EDA visualizations
+3. Models train automatically and are compared side by side
+4. Click **Run GridSearchCV tuning** to optimize the Decision Tree
+5. Use the **Predict** section to check churn probability for any test customer
+6. Download predictions as CSV
+
+## 📌 Notes
+
+- Recall is used as the primary model-selection metric since catching potential churners matters more than raw accuracy.
+- The tuned pipeline (scaler + optimized Decision Tree) is saved as `best_model.pkl` after running GridSearchCV.
